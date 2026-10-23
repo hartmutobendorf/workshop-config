@@ -2,3 +2,9 @@
 .workshop.lock
 node_modules
 .pnpm-store
+/target/
+/*.snap
+/parts/
+/stage/
+/prime/
+/.snapcraft/

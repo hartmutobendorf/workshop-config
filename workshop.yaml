@@ -1,33 +1,24 @@
 name: design
 base: ubuntu@24.04
 sdks:
-  - name: system
-    plugs:
-      penpot:
-        interface: tunnel
-        endpoint: 4400
-      penpot-http:
-        interface: tunnel
-        endpoint: 4401
-      penpot-websocket:
-        interface: tunnel
-        endpoint: 4402
-      penpot-repl:
-        interface: tunnel
-        endpoint: 4403
-  - name: vscode-remote
-    channel: latest/stable
-  - name: copilot
-    channel: latest/stable
-  - name: opencode
-    channel: latest/stable
-  - name: pi-coding-agent
-    channel: latest/edge
-  - name: node
-    channel: latest/stable
-  - name: uv
-    channel: latest/stable
-  - name: project-mcps
+- name: system
+  plugs:
+    penpot:
+      interface: tunnel
+      endpoint: 4400
+    penpot-http:
+      interface: tunnel
+      endpoint: 4401
+    penpot-websocket:
+      interface: tunnel
+      endpoint: 4402
+    penpot-repl:
+      interface: tunnel
+      endpoint: 4403
+- name: uv
+  channel: latest/stable
+- name: hermes-agent
+  channel: latest/stable
 actions:
   fetch-skills: |
     if [ -d /home/workshop/.copilot/skills/.git ]; then
@@ -38,7 +29,3 @@ actions:
     fi
   fetch-canonical-skills: |
     npx skills add canonical/skills
-
-connections:
-  - plug: mcps:ssh-agent
-    slot: system:ssh-agent

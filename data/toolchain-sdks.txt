@@ -1,0 +1,9 @@
+node
+uv
+openjdk
+dotnet
+go
+rust
+zig
+flutter
+docker-ce

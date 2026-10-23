@@ -1,0 +1,51 @@
+name: workshop-config
+base: core24
+adopt-info: workshop-config
+summary: Create Canonical Workshop definitions in your terminal
+description: |
+  Select a combination of SDKs, discover their descriptions and latest channel
+  versions, and preview and save Workshop YAML definitions in a TUI editor.
+  Edit advanced YAML using the bundled nano editor.
+
+  Strict confinement limits project access to permitted home-directory paths.
+  SDK discovery uses the network interface. No Workshop daemon is required.
+grade: devel
+confinement: strict
+
+platforms:
+  amd64:
+  arm64:
+
+apps:
+  workshop-config:
+    command: bin/workshop-config
+    plugs:
+      - home
+      - network
+      - workshop-try
+    environment:
+      TERMINFO_DIRS: $SNAP/usr/share/terminfo:$SNAP/lib/terminfo:/usr/share/terminfo:/lib/terminfo
+
+plugs:
+  workshop-try:
+    interface: personal-files
+    read:
+      - $HOME/.local/share/workshop/try
+
+parts:
+  workshop-config:
+    plugin: rust
+    source: .
+    rust-channel: stable
+    build-packages:
+      - build-essential
+      - pkg-config
+    stage-packages:
+      - nano
+      - ncurses-base
+      - ncurses-term
+    override-build: |
+      craftctl default
+      craftctl set version="$(python3 -c 'import tomllib; print(tomllib.load(open("Cargo.toml", "rb"))["package"]["version"])')"
+    organize:
+      bin/workshop-tui: bin/workshop-config

@@ -1,0 +1,11 @@
+opencode
+pi
+omp
+hermes-agent
+copilot
+claude-code
+codex
+dsh
+herdr
+hindsight
+kiro

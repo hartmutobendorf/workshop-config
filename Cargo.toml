@@ -1,0 +1,18 @@
+[package]
+name = "workshop-tui"
+version = "0.2.0"
+edition = "2024"
+description = "An interactive Workshop definition editor for Canonical Workshop"
+
+[dependencies]
+anyhow = "1"
+clap = { version = "4", features = ["derive", "env"] }
+crossterm = "0.28"
+ratatui = "0.29"
+regex = "1"
+reqwest = { version = "0.12", default-features = false, features = ["blocking", "json", "rustls-tls"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+serde_yaml = "0.9"
+shell-words = "1"
+tempfile = "3"
